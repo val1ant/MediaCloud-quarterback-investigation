@@ -135,11 +135,7 @@ def json_save(file, label, content):
 		
 ###if __name__ == "__main__":
 	#download words/corpus
-	#
 
-###write data into 'data' dir
-### git ignore	
-	
 # def tf_idf(doc,corpus): #computes tf-idf for each word in each document in the corpus (passed in as dictionary -- {"qb name":[word,word,word], ...})
 	# print "START TF-IDF"
 	# corpus = byteify(corpus)
