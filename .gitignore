@@ -1,5 +1,5 @@
 data/*.json
 data/*.csv
-qb-sentences
-sorted-tfidf
-word-count
+data/qb-sentences
+data/sorted-tfidf
+data/word-count
