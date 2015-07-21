@@ -12,8 +12,10 @@ mc = mediacloud.api.AdminMediaCloud(MY_API_KEY) #AdminMediaCloud, rather than Me
 f = open('qb-table.csv')
 qb_table = csv.reader(f)
 
+m = open('potentialsources.csv') ###should I include sources that haven't gleaned sentences in the past year?
+media_reader = csv.reader(m)
+media = [x[1] for x in media_reader]	[1:]
 
-media = [4487,4451,24656,24927,25357,25782,26059,26159,24745,68146,89358,4490,25848,169548,1526581]
 stopwords = stopwords.getStopWords()
 
 ############################################
@@ -130,7 +132,14 @@ def byteify(input):
 def json_save(file, label, content):
 	with open ('../quarterback/'+file+'/'+label+'.txt', "w") as outfile:
 		json.dump(content,outfile)
+		
+###if __name__ == "__main__":
+	#download words/corpus
+	#
 
+###write data into 'data' dir
+### git ignore	
+	
 # def tf_idf(doc,corpus): #computes tf-idf for each word in each document in the corpus (passed in as dictionary -- {"qb name":[word,word,word], ...})
 	# print "START TF-IDF"
 	# corpus = byteify(corpus)
@@ -165,3 +174,4 @@ def json_save(file, label, content):
 ###CSV RACE DATA SOURCES###
 #Arizona Cardinals - Ryan Lindley, Cleveland Browns - Connor Shaw, Houston Texans - Case Keenum: used methodology from site below
 #ALL OTHERS: http://www.besttickets.com/blog/nfl-player-census-2014/
+
