@@ -29,7 +29,6 @@ for subdir, dirs, files in os.walk(path):
         no_punctuation = lowers.translate(None, string.punctuation)
         token_dict[file] = no_punctuation
         
-###if __name__ == "__main__":
-	#download words/corpus
-	#tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
-	#tfs = tfidf.fit_transform(token_dict.values())
+if __name__ == "__main__":
+	tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
+	tfs = tfidf.fit_transform(token_dict.values())
