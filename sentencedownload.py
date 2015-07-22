@@ -134,7 +134,7 @@ def json_save(file, label, content):
 	with open ('../quarterback/'+file+'/'+label+'.txt', "w") as outfile:
 		json.dump(content,outfile)
 		
-###if __name__ == "__main__":
+if __name__ == "__main__":
 	qb_sort()
 	race_sort()
 
