@@ -4,4 +4,4 @@ data/qb-sentences
 data/sorted-tfidf
 data/word-count
 junk/
-qb-config.txt
+config.txt
