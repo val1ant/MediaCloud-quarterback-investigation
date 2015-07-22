@@ -1,4 +1,4 @@
-import mediacloud, json, csv, sys, math, string, operator, nltk, stopwords, datetime
+import datetime, json, csv, sys, math, string, operator, nltk, stopwords, mediacloud
 from nltk.tokenize import wordpunct_tokenize
 from collections import Counter
 
@@ -17,6 +17,7 @@ media_reader = csv.reader(m)
 media = [x[1] for x in media_reader]	[1:]
 
 stopwords = stopwords.getStopWords()
+print stopwords
 
 ############################################
 	
