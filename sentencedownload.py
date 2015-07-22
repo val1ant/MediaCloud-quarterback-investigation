@@ -17,7 +17,6 @@ media_reader = csv.reader(m)
 media = [x[1] for x in media_reader]	[1:]
 
 stopwords = stopwords.getStopWords()
-print stopwords
 
 ############################################
 	
@@ -166,10 +165,3 @@ if __name__ == "__main__":
 		# if word in corpus[doc]: 	
 			# num_docs_with_word += 1
 	# return math.log(float(num_docs)/float(num_docs_with_word))
-	
-	
-
-###CSV RACE DATA SOURCES###
-#Arizona Cardinals - Ryan Lindley, Cleveland Browns - Connor Shaw, Houston Texans - Case Keenum: used methodology from site below
-#ALL OTHERS: http://www.besttickets.com/blog/nfl-player-census-2014/
-
