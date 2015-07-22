@@ -135,7 +135,8 @@ def json_save(file, label, content):
 		json.dump(content,outfile)
 		
 ###if __name__ == "__main__":
-	#download words/corpus
+	qb_sort()
+	race_sort()
 
 # def tf_idf(doc,corpus): #computes tf-idf for each word in each document in the corpus (passed in as dictionary -- {"qb name":[word,word,word], ...})
 	# print "START TF-IDF"
