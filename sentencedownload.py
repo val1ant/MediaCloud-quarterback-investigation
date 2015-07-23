@@ -55,7 +55,7 @@ def sortnsave(): #assembles corpus, dumps qb words in buckets based on race, cal
 		sorted_doc = sorted(counted_doc.items(), key=operator.itemgetter(1), reverse = True) 
 		count_corpus[qb] = counted_doc
 		json_save('counts/player/',file_label,sorted_doc)
-		print team, qb, len(words)
+		print team, qb, len(qb_words)
 		if race == 'white':
 			white_doc += qb_words
 		elif race == 'black':
