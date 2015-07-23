@@ -35,7 +35,6 @@ def wordsearch(team,qb): #MC query, returns list of words
 			words += [x for x in some_words if x not in exclude]
 	return words
 
-
 def sortnsave(): #assembles corpus, dumps qb words in buckets based on race, calls wordcount_save, tfidf_save for each bucket
 	corpus = {}
 	count_corpus = {}
