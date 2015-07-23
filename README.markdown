@@ -19,7 +19,7 @@ Open up your virtual environment in terminal and run sentencedownload.py.
 
 #### tfidf
 The tfidf script calculates and saves tfidf values from the files downloaded in executing the sentencedownload script. 
-Therefore, you must run sentencedownload prior to running tfidf. 
+Therefore, *you must run sentencedownload prior to running tfidf*. 
 Open up your virtual environment in terminal and run tfidf.py.
 
 ### METHODOLOGY
