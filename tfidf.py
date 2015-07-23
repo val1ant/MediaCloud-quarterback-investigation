@@ -12,7 +12,6 @@ except ImportError:
 from nltk.stem.porter import PorterStemmer
 
 ### Need to change path and save location (marked by ####### below), depending on if running for players or race ###
-path = '../quarterback/data/words/player'
 token_dict = {}
 stemmer = PorterStemmer()
 
@@ -26,25 +25,25 @@ def tokenize(text):
     tokens = nltk.word_tokenize(text)
     stems = stem_tokens(tokens, stemmer)
     return stems
-
-for subdir, dirs, files in os.walk(path):
-	for file in files:
-		file_path = subdir + os.path.sep + file
-		shakes = open(file_path, 'r')
-		text = shakes.read()
-		lowers = text.lower()
-		no_punctuation = lowers.translate(None, string.punctuation)
-		token_dict[file] = no_punctuation
 		
 #############################################
 
-def tf_idf(): #computes tf-idf for each word in each document in the corpus (passed in as dictionary -- {"qb name":[word,word,word], ...})
+def tf_idf(collection): #computes tf-idf for each word in each document in the corpus (passed in as dictionary -- {"qb name":[word,word,word], ...})
+	path = '../quarterback/data/words/'+collection
+	for subdir, dirs, files in os.walk(path):
+		for file in files:
+			file_path = subdir + os.path.sep + file
+			shakes = open(file_path, 'r')
+			text = shakes.read()
+			lowers = text.lower()
+			no_punctuation = lowers.translate(None, string.punctuation)
+			token_dict[file] = no_punctuation
 	corpus = token_dict
 	num_docs = len(corpus)
 	corp_results = {}
 	for item in corpus:
 		print "START TF-IDF"
-		player = item[:-4]
+		filename = item[:-4]
 		doc = corpus[item].split(' ')
 		results = {}
 		corpus_words = token_dict.values()
@@ -54,9 +53,11 @@ def tf_idf(): #computes tf-idf for each word in each document in the corpus (pas
 				word_idf = idf(word,corpus)
 				results[word] = word_tf*word_idf
 		sorted_results = sorted(results.items(), key=operator.itemgetter(1), reverse=True)
-		corp_results[player] = sorted_results
+		corp_results[filename] = sorted_results
+		with open ('../quarterback/data/tfidf/'+collection+'/'+filename+'.txt', "w") as outfile: 
+			json.dump(sorted_results,outfile)
 		print 'END TF-IDF'
-	with open ('../quarterback/data/tfidf/###CORPUS###.txt', "w") as outfile:  #######
+	with open ('../quarterback/data/tfidf/'+collection+'###CORPUS###.txt', "w") as outfile:  
 		json.dump(corp_results,outfile)
 	
 def tf(word,doc):
@@ -75,7 +76,12 @@ def idf(word,corpus):
 
 if __name__ == "__main__":
 	if scikit:
-		tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
-		tfs = tfidf.fit_transform(token_dict.values())
+		for x in ['player','race']:
+			path = '../quarterback/data/words/'+x
+			tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
+			tfs = tfidf.fit_transform(token_dict.values())
+			with open ('../quarterback/data/tfidf/'+x+'###CORPUS###.txt', "w") as outfile: 
+				json.dump(tfs,outfile)
 	else:
-		tf_idf()
+		tf_idf('player')
+		tf_idf('race')
