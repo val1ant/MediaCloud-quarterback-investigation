@@ -45,9 +45,9 @@ def tf_idf(collection): #computes tf-idf for each word in each document in the c
 	for item in corpus:
 		print "START TF-IDF"
 		filename = item[:-4]
+		print filename
 		doc = corpus[item].split(' ')
 		results = {}
-		corpus_words = token_dict.values()
 		for word in doc:
 			if word not in results:
 				word_tf  = tf(word,doc)
@@ -57,7 +57,6 @@ def tf_idf(collection): #computes tf-idf for each word in each document in the c
 		corp_results[filename] = sorted_results
 		with open ('../quarterback/data/tfidf/'+collection+'/'+filename+'.txt', "w") as outfile: 
 			json.dump(sorted_results,outfile)
-		print 'END TF-IDF'
 	with open ('../quarterback/data/tfidf/###'+collection.upper()+'CORPUS###.txt', "w") as outfile:  
 		json.dump(corp_results,outfile)
 	
