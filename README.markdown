@@ -5,13 +5,12 @@ This is the code for MediaCloud's quarterback study, created by [Val Healy]( htt
 ## INSTALLATION
 
 To install, save this repository's files to your computer.
-Open the config file (config.txt) and paste in your API key where indicated. Don't have a MediaCloud API key? Register to get yours [here]( https://core.mediacloud.org/login/register ) and see yours [here]( https://core.mediacloud.org/admin/profile ).
+Open the config file (config.txt) and paste in your API key where indicated. Don't have a MediaCloud API key? Register to get yours [here]( https://core.mediacloud.org/login/register ) and see your API key [here]( https://core.mediacloud.org/admin/profile ).
 Then, install the dependencies listed below.
 
 ### DEPENDENCIES
 
 This program has several dependencies. You will need to have the [MediaCloud API client]( https://github.com/c4fcm/MediaCloud-API-Client ) and the [Natural Language Toolkit]( http://www.nltk.org/ ) in order to run these scripts.
-You will also need to download and save MediaMeter's [stopwords script]( https://github.com/c4fcm/Global-Coverage-Study/blob/master/media-source-dashboard/mediameter/stopwords.py#L17 ) and [stopword list]( https://raw.githubusercontent.com/c4fcm/Global-Coverage-Study/master/json-generator/stop-words-english4.txt ).
 
 ### HOW TO RUN
 
