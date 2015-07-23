@@ -11,7 +11,8 @@ except ImportError:
 	
 from nltk.stem.porter import PorterStemmer
 
-### Need to change path and save location (marked by ####### below), depending on if running for players or race ###
+### NOTE: scikit will only yield a corpus for each run (player, race). Alternate TF-IDF will yield a corpus *and* individual files ###
+
 token_dict = {}
 stemmer = PorterStemmer()
 
