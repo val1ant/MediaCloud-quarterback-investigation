@@ -40,14 +40,11 @@ def tf_idf(collection): #computes tf-idf for each word in each document in the c
 			lowers = text.lower()
 			no_punctuation = lowers.translate(None, string.punctuation)
 			token_dict[file] = no_punctuation
-			print 'collection and file: ', collection, file
 	corpus = token_dict
 	num_docs = len(corpus)
 	corp_results = {}
 	for item in corpus:
-		print "START TF-IDF"
 		filename = item[:-4]
-		print 'filename', filename
 		doc = corpus[item].split(' ')
 		results = {}
 		for word in doc:
