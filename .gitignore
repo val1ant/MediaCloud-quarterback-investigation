@@ -1,7 +1,7 @@
 data/*.json
 data/*.csv
-data/qb-sentences
-data/sorted-tfidf
-data/word-count
+data/words
+data/tfidf
+data/counts
 junk/
 config.txt
