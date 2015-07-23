@@ -68,18 +68,18 @@ def sortnsave(): #assembles corpus, dumps qb words in buckets based on race, cal
 			print "Race sorting error!", team, qb, race
 	json_save('words','###CORPUS###',corpus)
 	json_save('counts','###CORPUS###',count_corpus)
-	json_save('words/white_words','white_words',white_doc)
-	json_save('words/black_words','black_words',black_doc)
-	json_save('words/other_words','other_words',other_doc)
-	json_save('words/hispanic_words','hispanic_words',hispanic_doc)
+	json_save('words/race','white_words',white_doc)
+	json_save('words/race','black_words',black_doc)
+	json_save('words/race','other_words',other_doc)
+	json_save('words/race','hispanic_words',hispanic_doc)
 	white_counts = dict((x,white_doc.count(x)) for x in set(white_doc)) 
-	json_save('counts/white_wordcount','white_counts',white_counts)
+	json_save('counts/race','white_counts',white_counts)
 	black_counts = dict((x,black_doc.count(x)) for x in set(black_doc)) 
-	json_save('counts/black_wordcount','black_counts',black_counts)
+	json_save('counts/race','black_counts',black_counts)
 	other_counts = dict((x,other_doc.count(x)) for x in set(other_doc)) 
-	json_save('counts/other_wordcount','other_counts',other_counts)
+	json_save('counts/race','other_counts',other_counts)
 	hispanic_counts = dict((x,hispanic_doc.count(x)) for x in set(hispanic_doc)) 
-	json_save('counts/hispanic_wordcount','hispanic_counts',hispanic_counts)
+	json_save('counts/race','hispanic_counts',hispanic_counts)
 
 def byteify(input):
     if isinstance(input, dict):
