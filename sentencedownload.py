@@ -79,7 +79,7 @@ def sortnsave(): #assembles corpus, dumps qb words in buckets based on race, cal
 	other_counts = dict((x,other_doc.count(x)) for x in set(other_doc)) 
 	json_save('counts/other_wordcount','other_counts',other_counts)
 	hispanic_counts = dict((x,hispanic_doc.count(x)) for x in set(hispanic_doc)) 
-	json_save('counts/hispanic_wordcount','hispanic_counts'hispanic_counts)
+	json_save('counts/hispanic_wordcount','hispanic_counts',hispanic_counts)
 
 def byteify(input):
     if isinstance(input, dict):
