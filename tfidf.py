@@ -31,6 +31,7 @@ def tokenize(text):
 
 def tf_idf(collection): #computes tf-idf for each word in each document in the corpus (passed in as dictionary -- {"qb name":[word,word,word], ...})
 	path = '../quarterback/data/words/'+collection
+	token_dict = {}
 	for subdir, dirs, files in os.walk(path):
 		for file in files:
 			file_path = subdir + os.path.sep + file
@@ -39,13 +40,14 @@ def tf_idf(collection): #computes tf-idf for each word in each document in the c
 			lowers = text.lower()
 			no_punctuation = lowers.translate(None, string.punctuation)
 			token_dict[file] = no_punctuation
+			print 'collection and file: ', collection, file
 	corpus = token_dict
 	num_docs = len(corpus)
 	corp_results = {}
 	for item in corpus:
 		print "START TF-IDF"
 		filename = item[:-4]
-		print filename
+		print 'filename', filename
 		doc = corpus[item].split(' ')
 		results = {}
 		for word in doc:
@@ -78,6 +80,14 @@ if __name__ == "__main__":
 	if scikit:
 		for x in ['player','race']:
 			path = '../quarterback/data/words/'+x
+			for subdir, dirs, files in os.walk(path):
+				for file in files:
+					file_path = subdir + os.path.sep + file
+					shakes = open(file_path, 'r')
+					text = shakes.read()
+					lowers = text.lower()
+					no_punctuation = lowers.translate(None, string.punctuation)
+					token_dict[file] = no_punctuation
 			tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
 			tfs = tfidf.fit_transform(token_dict.values())
 			with open ('../quarterback/data/tfidf/'+x+'###CORPUS###.txt', "w") as outfile: 
