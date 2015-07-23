@@ -1,7 +1,4 @@
-data/*.json
-data/*.csv
-data/words
-data/tfidf
-data/counts
+
+data/
 junk/
 config.txt
