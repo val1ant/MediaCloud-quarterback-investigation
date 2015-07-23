@@ -26,7 +26,7 @@ def wordsearch(team,qb): #MC query, returns list of words
 	exclude = list(string.punctuation)+qb_split+team.split()+byteify(stopwords)+['1','2','3','4','5','6','7','8','9','0']
 	exclude = [x.lower() for x in exclude]
 	for source in media:
-		sentences = mc.sentenceList(solr_query=str('"'+qb+'"'), solr_filter=[mc.publish_date_query(datetime.date(2014,9,4), datetime.date(2015,2,1)), '+media_id:'+str(source)], rows = 10000, sort = 'publish_date_desc')
+		sentences = mc.sentenceList(solr_query=str('"'+qb+'"'), solr_filter=[mc.publish_date_query(datetime.date(2014,9,4), datetime.date(2015,2,1)), '+media_id:'+str(source)], rows = 10000)
 		response = sentences['response']
 		docs = response['docs']
 		for doc in docs:  
