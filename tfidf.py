@@ -11,7 +11,7 @@ except ImportError:
 	
 from nltk.stem.porter import PorterStemmer
 
-### Need to change path and save location, depending on if running for qb or race
+### Need to change path and save location (marked by ####### below), depending on if running for players or race ###
 path = '../quarterback/data/words/player'
 token_dict = {}
 stemmer = PorterStemmer()
