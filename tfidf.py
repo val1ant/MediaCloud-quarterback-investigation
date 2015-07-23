@@ -56,7 +56,7 @@ def tf_idf(): #computes tf-idf for each word in each document in the corpus (pas
 		sorted_results = sorted(results.items(), key=operator.itemgetter(1), reverse=True)
 		corp_results[player] = sorted_results
 		print 'END TF-IDF'
-	with open ('../quarterback/data/sorted-tfidf/###CORPUS###.txt', "w") as outfile:  #######
+	with open ('../quarterback/data/tfidf/###CORPUS###.txt', "w") as outfile:  #######
 		json.dump(corp_results,outfile)
 	
 def tf(word,doc):
