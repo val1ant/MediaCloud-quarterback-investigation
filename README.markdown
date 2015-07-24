@@ -10,7 +10,7 @@ Then, install the dependencies listed below.
 
 ### DEPENDENCIES
 
-This program has several dependencies. You will need to have the [MediaCloud API client]( https://github.com/c4fcm/MediaCloud-API-Client ) and the [Natural Language Toolkit]( http://www.nltk.org/ ) in order to run these scripts.
+This program has several dependencies. You will need to have the [MediaCloud API client]( https://github.com/c4fcm/MediaCloud-API-Client ), the [Natural Language Toolkit]( http://www.nltk.org/ ), and [unicodecsv]( https://pypi.python.org/pypi/unicodecsv ) in order to run these scripts. [scipy]( http://www.scipy.org/ ) is optional.
 
 ### HOW TO RUN
 
