@@ -30,7 +30,7 @@ def tokenize(text):
 #############################################
 
 def tf_idf(collection): #computes tf-idf for each word in each document in the corpus (passed in as dictionary -- {"qb name":[word,word,word], ...})
-	path = '../quarterback/data/words/'+collection
+	path = '../quarterback/data/json/words/'+collection
 	token_dict = {}
 	for subdir, dirs, files in os.walk(path):
 		for file in files:
@@ -54,9 +54,9 @@ def tf_idf(collection): #computes tf-idf for each word in each document in the c
 				results[word] = word_tf*word_idf
 		sorted_results = sorted(results.items(), key=operator.itemgetter(1), reverse=True)
 		corp_results[filename] = sorted_results
-		with open ('../quarterback/data/tfidf/'+collection+'/'+filename+'.txt', "w") as outfile: 
+		with open ('../quarterback/data/json/tfidf/'+collection+'/'+filename+'.txt', "w") as outfile: 
 			json.dump(sorted_results,outfile)
-	with open ('../quarterback/data/tfidf/###'+collection.upper()+'CORPUS###.txt', "w") as outfile:  
+	with open ('../quarterback/data/json/tfidf/###'+collection.upper()+'CORPUS###.txt', "w") as outfile:  
 		json.dump(corp_results,outfile)
 	
 def tf(word,doc):
@@ -76,7 +76,7 @@ def idf(word,corpus):
 if __name__ == "__main__":
 	if scikit:
 		for x in ['player','race']:
-			path = '../quarterback/data/words/'+x
+			path = '../quarterback/data/json/words/'+x
 			for subdir, dirs, files in os.walk(path):
 				for file in files:
 					file_path = subdir + os.path.sep + file
@@ -87,7 +87,7 @@ if __name__ == "__main__":
 					token_dict[file] = no_punctuation
 			tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
 			tfs = tfidf.fit_transform(token_dict.values())
-			with open ('../quarterback/data/tfidf/'+x+'###CORPUS###.txt', "w") as outfile: 
+			with open ('../quarterback/data/json/tfidf/'+x+'###CORPUS###.txt', "w") as outfile: 
 				json.dump(tfs,outfile)
 	else:
 		tf_idf('player')

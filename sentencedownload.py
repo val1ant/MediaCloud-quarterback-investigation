@@ -90,7 +90,7 @@ def byteify(input):
         return input
 		
 def json_save(file, label, content):
-	with open ('../quarterback/data/'+file+'/'+label+'.txt', "w") as outfile:
+	with open ('../quarterback/data/json/'+file+'/'+label+'.txt', "w") as outfile:
 		json.dump(content,outfile)
 		
 if __name__ == "__main__":
