@@ -4,7 +4,7 @@ This is the code for MediaCloud's quarterback study, created by [Val Healy]( htt
 
 ## INSTALLATION
 
-To install, save this repository's files to your computer.
+To install, save this repository to your computer.
 Open the config file (config.txt) and paste in your API key where indicated. Don't have a MediaCloud API key? Register to get yours [here]( https://core.mediacloud.org/login/register ) and see your API key [here]( https://core.mediacloud.org/admin/profile ).
 Then, install the dependencies listed below.
 
