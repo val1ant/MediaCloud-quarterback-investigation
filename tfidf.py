@@ -1,7 +1,7 @@
 import nltk
 import string
 import os
-import math,operator,json
+import math,operator,json,unicodecsv
 
 try:
 	from sklearn.feature_extraction.text import TfidfVectorizer
@@ -56,6 +56,14 @@ def tf_idf(collection): #computes tf-idf for each word in each document in the c
 		corp_results[filename] = sorted_results
 		with open ('../quarterback/data/json/tfidf/'+collection+'/'+filename+'.txt', "w") as outfile: 
 			json.dump(sorted_results,outfile)
+		with open('../quarterback/data/csv/tfidf/'+collection+'/'+filename+'.csv', 'wb') as myfile:
+			try:
+				w = unicodecsv.writer(myfile)
+				w.writerow( ('WORD', 'TF-IDF') )
+				for i in results:
+					w.writerow( (i, results[i]) )
+			finally:
+				myfile.close()
 	with open ('../quarterback/data/json/tfidf/###'+collection.upper()+'CORPUS###.txt', "w") as outfile:  
 		json.dump(corp_results,outfile)
 	
