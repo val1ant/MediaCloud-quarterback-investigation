@@ -12,6 +12,10 @@ Then, install the dependencies listed below.
 
 This program has several dependencies. You will need to have the [MediaCloud API client]( https://github.com/c4fcm/MediaCloud-API-Client ), the [Natural Language Toolkit]( http://www.nltk.org/ ), and [unicodecsv]( https://pypi.python.org/pypi/unicodecsv ) in order to run these scripts. [scipy]( http://www.scipy.org/ ) is optional.
 
+```shell
+pip install -r requirements.pip
+```
+
 ### HOW TO RUN
 
 #### sentencedownload

@@ -17,3 +17,4 @@ data/csv/counts/player/*.csv
 data/csv/counts/race/*.csv
 junk/
 config.txt
+venv
