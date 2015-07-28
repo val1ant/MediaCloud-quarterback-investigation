@@ -5,12 +5,16 @@ This is the code for MediaCloud's quarterback study, created by [Val Healy]( htt
 ## INSTALLATION
 
 To install, save this repository to your computer.
-Open the config file (config.txt) and paste in your API key where indicated. Don't have a MediaCloud API key? Register to get yours [here]( https://core.mediacloud.org/login/register ) and see your API key [here]( https://core.mediacloud.org/admin/profile ).
+Copy the `config.txt.template` to `config.txt` and then paste in your API key where indicated. Don't have a MediaCloud API key? Register to get yours [here]( https://core.mediacloud.org/login/register ) and see your API key [here]( https://core.mediacloud.org/admin/profile ).
 Then, install the dependencies listed below.
 
 ### DEPENDENCIES
 
 This program has several dependencies. You will need to have the [MediaCloud API client]( https://github.com/c4fcm/MediaCloud-API-Client ), the [Natural Language Toolkit]( http://www.nltk.org/ ), and [unicodecsv]( https://pypi.python.org/pypi/unicodecsv ) in order to run these scripts. [scipy]( http://www.scipy.org/ ) is optional.
+
+```shell
+pip install -r requirements.pip
+```
 
 ### HOW TO RUN
 

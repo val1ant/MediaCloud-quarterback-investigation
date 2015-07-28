@@ -8,12 +8,16 @@ data/json/tfidf/*.txt
 data/json/words/*.txt
 data/json/counts/*.txt
 data/*.xlsx
-
 data/csv/tfidf/player/*.csv
 data/csv/tfidf/race/*.csv
 data/csv/words/player/*.csv
 data/csv/words/race/*.csv
 data/csv/counts/player/*.csv
 data/csv/counts/race/*.csv
+data/csv/tfidf/player/*.txt
+data/json/tfidf/player/*.json
+data/json/tfidf/race/*.json
 junk/
 config.txt
+venv
+*.pyc
