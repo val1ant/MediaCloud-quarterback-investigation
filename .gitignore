@@ -18,3 +18,4 @@ data/csv/counts/race/*.csv
 junk/
 config.txt
 venv
+*.pyc
