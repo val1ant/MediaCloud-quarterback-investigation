@@ -1,4 +1,4 @@
-import datetime, json, csv, sys, math, string, operator, nltk, stopwords, mediacloud, unicodecsv
+import datetime, json, csv, sys, math, string, operator, nltk, stopwords, mediacloud, unicodecsv, logging, os
 from cStringIO import StringIO ###
 from nltk.tokenize import wordpunct_tokenize
 from collections import Counter
@@ -9,6 +9,8 @@ parser = SafeConfigParser()
 parser.read('config.txt')
 MY_API_KEY = parser.get('API','MY_API_KEY')
 mc = mediacloud.api.AdminMediaCloud(MY_API_KEY) #AdminMediaCloud, rather than MediaCloud
+
+logging.basicConfig(level=logging.DEBUG)
 
 t = open('qb-table.csv')
 qb_table = csv.reader(t)
@@ -22,18 +24,21 @@ stopwords = stopwords.getStopWords()
 ############################################
 	
 def wordsearch(team,qb): #MC query, returns list of words 
+	logging.info('  querying for %s (%s)...' % (qb,team))
 	words = []
 	qb_split = qb.split()
 	exclude = list(string.punctuation)+qb_split+team.split()+byteify(stopwords)+['1','2','3','4','5','6','7','8','9','0']
 	exclude = [x.lower() for x in exclude]
 	for source in media:
 		sentences = mc.sentenceList(solr_query=str('"'+qb+'"'), solr_filter=[mc.publish_date_query(datetime.date(2014,9,4), datetime.date(2015,2,1)), '+media_id:'+str(source)], rows = 10000)
+		logging.info('    found %d sentences',len(sentences))
 		response = sentences['response']
 		docs = response['docs']
 		for doc in docs:  
 			some_words = byteify(wordpunct_tokenize(doc['sentence']))
 			some_words = [x.lower() for x in some_words]
 			words += [x for x in some_words if x not in exclude]
+	logging.info('  done')
 	return words
 
 def sortnsave(): #assembles corpus, dumps qb words in buckets based on race, calls wordcount_save, tfidf_save for each bucket
@@ -43,6 +48,7 @@ def sortnsave(): #assembles corpus, dumps qb words in buckets based on race, cal
 	black_doc = []
 	other_doc = []
 	hispanic_doc = []
+	logging.info('Fetching sentences...')
 	for row in qb_table:
 		team = row[0]
 		qb = row[1]
@@ -66,6 +72,7 @@ def sortnsave(): #assembles corpus, dumps qb words in buckets based on race, cal
 			hispanic_doc += qb_words
 		else:
 			print "Race sorting error!", team, qb, race
+	logging.info('done fetching sentences')
 	json_save('words','###CORPUS###',corpus)
 	json_save('counts','###CORPUS###',count_corpus)
 	json_save('words/race','white_words',white_doc)
@@ -90,21 +97,28 @@ def sortnsave(): #assembles corpus, dumps qb words in buckets based on race, cal
 	csv_save('counts/race','hispanic_counts',hispanic_counts)
 
 def byteify(input):
-    if isinstance(input, dict):
-        return {byteify(key):byteify(value) for key,value in input.iteritems()}
-    elif isinstance(input, list):
-        return [byteify(element) for element in input]
-    elif isinstance(input, unicode):
-        return input.encode('utf-8')
-    else:
-        return input
+	if isinstance(input, dict):
+		return {byteify(key):byteify(value) for key,value in input.iteritems()}
+	elif isinstance(input, list):
+		return [byteify(element) for element in input]
+	elif isinstance(input, unicode):
+		return input.encode('utf-8')
+	else:
+		return input
 		
 def json_save(file, label, content):
-	with open ('../quarterback/data/json/'+file+'/'+label+'.txt', "w") as outfile:
+	directory = os.path.join('data','json',file)
+	if not os.path.exists(directory):
+		os.makedirs(directory)
+	with open( os.path.join(directory,label+'.txt'), "w") as outfile:
 		json.dump(content,outfile)
 		
 def csv_save(file,label,content):
-	with open('../quarterback/data/csv/'+file+'/'+label+'.csv', 'wb') as myfile:
+	directory = os.path.join('data','csv',file)
+	if not os.path.exists(directory):
+		os.makedirs(directory)
+
+	with open( os.path.join(directory,label+'.csv'), 'wb') as myfile:
 		if isinstance(content,dict):
 			try:
 				w = unicodecsv.writer(myfile)
