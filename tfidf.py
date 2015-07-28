@@ -11,7 +11,8 @@ except ImportError:
 	
 from nltk.stem.porter import PorterStemmer
 
-### NOTE: scikit will only yield a corpus for each run (player, race). Alternate TF-IDF will yield a corpus *and* individual files ###
+### NOTE: scikit will only yield a corpus for each run (player, race). Alternate TF-IDF will yield a corpus *and* individual files. ###
+### Additionally, scikit tokenizes words, while my tf-idf does not. ###
 
 token_dict = {}
 stemmer = PorterStemmer()
