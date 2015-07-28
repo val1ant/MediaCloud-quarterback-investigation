@@ -1,7 +1,9 @@
-import nltk
+import nltk, logging
 import string
 import os
 import math,operator,json,unicodecsv
+
+logging.basicConfig(level=logging.DEBUG	)
 
 try:
 	from sklearn.feature_extraction.text import TfidfVectorizer
@@ -31,7 +33,10 @@ def tokenize(text):
 #############################################
 
 def tf_idf(collection): #computes tf-idf for each word in each document in the corpus (passed in as dictionary -- {"qb name":[word,word,word], ...})
-	path = '../quarterback/data/json/words/'+collection
+	logging.info('Computing tfidf for all %ss' % collection)
+	path = os.path.join('data','json','words',collection)
+	if not os.path.exists(path):
+		os.makedirs(path)
 	token_dict = {}
 	for subdir, dirs, files in os.walk(path):
 		for file in files:
@@ -55,17 +60,23 @@ def tf_idf(collection): #computes tf-idf for each word in each document in the c
 				results[word] = word_tf*word_idf
 		sorted_results = sorted(results.items(), key=operator.itemgetter(1), reverse=True)
 		corp_results[filename] = sorted_results
-		with open ('../quarterback/data/json/tfidf/'+collection+'/'+filename+'.txt', "w") as outfile: 
+		directory = os.path.join('data','json','tfidf',collection)
+		if not os.path.exists(directory):
+			os.makedirs(directory)
+		with open( os.path.join(directory,filename+'.json'), "w") as outfile: 
 			json.dump(sorted_results,outfile)
-		with open('../quarterback/data/csv/tfidf/'+collection+'/'+filename+'.csv', 'wb') as myfile:
+		directory = os.path.join('data','csv','tfidf',collection)
+		if not os.path.exists(directory):
+			os.makedirs(directory)
+		with open( os.path.join(directory,filename+'.csv'), "wb") as outfile: 
 			try:
-				w = unicodecsv.writer(myfile)
+				w = unicodecsv.writer(outfile)
 				w.writerow( ('WORD', 'TF-IDF') )
 				for i in results:
 					w.writerow( (i, results[i]) )
 			finally:
-				myfile.close()
-	with open ('../quarterback/data/json/tfidf/###'+collection.upper()+'CORPUS###.txt', "w") as outfile:  
+				outfile.close()
+	with open( os.path.join('data','json','tfidf','###'+collection.upper()+'CORPUS###.txt'), "w") as outfile:  
 		json.dump(corp_results,outfile)
 	
 def tf(word,doc):
@@ -84,8 +95,9 @@ def idf(word,corpus):
 
 if __name__ == "__main__":
 	if scikit:
+		logging.info('(using scikit)')
 		for x in ['player','race']:
-			path = '../quarterback/data/json/words/'+x
+			path = os.path.join('quarterback','data','json','words',x)
 			for subdir, dirs, files in os.walk(path):
 				for file in files:
 					file_path = subdir + os.path.sep + file
@@ -96,7 +108,7 @@ if __name__ == "__main__":
 					token_dict[file] = no_punctuation
 			tfidf = TfidfVectorizer(tokenizer=tokenize, stop_words='english')
 			tfs = tfidf.fit_transform(token_dict.values())
-			with open ('../quarterback/data/json/tfidf/'+x+'###CORPUS###.txt', "w") as outfile: 
+			with open(os.path.join('data','json','tfidf',x+'###CORPUS###.txt'), "w") as outfile: 
 				json.dump(tfs,outfile)
 	else:
 		tf_idf('player')
